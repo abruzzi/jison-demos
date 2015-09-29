@@ -44,6 +44,8 @@ statements:
 
 statement: COUNT words AT PRICE
   {$$ = {count: parseInt($1), product: $2, price: parseFloat($4)}}
+  | COUNT words OF words AT PRICE
+  {$$ = {count: parseInt($1), quantity: $2, product: $4, price: parseFloat($6)}}
   ;
 
 words:

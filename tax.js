@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,7],$V2=[9,11];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,7],$V2=[1,8],$V3=[1,11],$V4=[9,11,12];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"statements":4,"EOF":5,"statement":6,"COUNT":7,"words":8,"AT":9,"PRICE":10,"WORD":11,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"COUNT",9:"AT",10:"PRICE",11:"WORD"},
-productions_: [0,[3,2],[4,1],[4,2],[6,4],[8,1],[8,2]],
+symbols_: {"error":2,"expressions":3,"statements":4,"EOF":5,"statement":6,"COUNT":7,"words":8,"AT":9,"PRICE":10,"OF":11,"WORD":12,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",7:"COUNT",9:"AT",10:"PRICE",11:"OF",12:"WORD"},
+productions_: [0,[3,2],[4,1],[4,2],[6,4],[6,6],[8,1],[8,2]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -91,7 +91,6 @@ case 2:
 this.$ = $$[$0]
 break;
 case 3:
-
 
     if($$[$0-1] instanceof Array) {
       $$[$0-1].push($$[$0]);
@@ -108,14 +107,17 @@ case 4:
 this.$ = {count: parseInt($$[$0-3]), product: $$[$0-2], price: parseFloat($$[$0])}
 break;
 case 5:
-this.$ = $$[$0];
+this.$ = {count: parseInt($$[$0-5]), quantity: $$[$0-4], product: $$[$0-2], price: parseFloat($$[$0])}
 break;
 case 6:
+this.$ = $$[$0];
+break;
+case 7:
 this.$ = $$[$0-1] + $$[$0];
 break;
 }
 },
-table: [{3:1,4:2,6:3,7:$V0},{1:[3]},{5:[1,5],6:6,7:$V0},o($V1,[2,2]),{8:7,11:[1,8]},{1:[2,1]},o($V1,[2,3]),{9:[1,9],11:[1,10]},o($V2,[2,5]),{10:[1,11]},o($V2,[2,6]),o($V1,[2,4])],
+table: [{3:1,4:2,6:3,7:$V0},{1:[3]},{5:[1,5],6:6,7:$V0},o($V1,[2,2]),{8:7,12:$V2},{1:[2,1]},o($V1,[2,3]),{9:[1,9],11:[1,10],12:$V3},o($V4,[2,6]),{10:[1,12]},{8:13,12:$V2},o($V4,[2,7]),o($V1,[2,4]),{9:[1,14],12:$V3},{10:[1,15]},o($V1,[2,5])],
 defaultActions: {5:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
@@ -601,9 +603,9 @@ case 4:return 'IMPORTED'
 break;
 case 5:return 9
 break;
-case 6:return 'OF'
+case 6:return 11
 break;
-case 7:return 11
+case 7:return 12
 break;
 case 8:return 5
 break;
