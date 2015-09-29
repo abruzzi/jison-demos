@@ -22,8 +22,7 @@
 
 expressions
     : statements EOF
-        { typeof console !== 'undefined' ? console.log($1) : print($1);
-          return $1; }
+        { return $1; }
     ;
 
 statements:
