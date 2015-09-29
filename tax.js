@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,7],$V2=[1,8],$V3=[1,11],$V4=[9,11,12];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,8],$V1=[5,11],$V2=[1,13],$V3=[1,16],$V4=[13,15,17];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"statements":4,"EOF":5,"statement":6,"COUNT":7,"words":8,"AT":9,"PRICE":10,"OF":11,"WORD":12,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",7:"COUNT",9:"AT",10:"PRICE",11:"OF",12:"WORD"},
-productions_: [0,[3,2],[4,1],[4,2],[6,4],[6,6],[8,1],[8,2]],
+symbols_: {"error":2,"expressions":3,"statements":4,"EOF":5,"statement":6,"simple":7,"with_quantity":8,"with_imported":9,"with_imported2":10,"COUNT":11,"words":12,"AT":13,"PRICE":14,"OF":15,"IMPORTED":16,"WORD":17,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",11:"COUNT",13:"AT",14:"PRICE",15:"OF",16:"IMPORTED",17:"WORD"},
+productions_: [0,[3,2],[4,1],[4,2],[6,1],[6,1],[6,1],[6,1],[7,4],[8,6],[9,7],[10,7],[12,1],[12,2]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -103,22 +103,57 @@ case 3:
     }
   
 break;
-case 4:
-this.$ = {count: parseInt($$[$0-3]), product: $$[$0-2], price: parseFloat($$[$0])}
+case 8:
+
+    this.$ = {
+      count: parseInt($$[$0-3]),
+      product: $$[$0-2],
+      price: parseFloat($$[$0])
+    }
+  
 break;
-case 5:
-this.$ = {count: parseInt($$[$0-5]), quantity: $$[$0-4], product: $$[$0-2], price: parseFloat($$[$0])}
+case 9:
+
+    this.$ = {
+      count: parseInt($$[$0-5]),
+      quantity: $$[$0-4],
+      product: $$[$0-2],
+      price: parseFloat($$[$0])
+    }
+  
 break;
-case 6:
+case 10:
+
+    this.$ = {
+      count: parseInt($$[$0-6]),
+      type: "imported",
+      quantity: $$[$0-4],
+      product: $$[$0-2],
+      price: parseFloat($$[$0])
+    }
+  
+break;
+case 11:
+
+    this.$ = {
+      count: parseInt($$[$0-6]),
+      type: "imported",
+      quantity: $$[$0-5],
+      product: $$[$0-2],
+      price: parseFloat($$[$0])
+    }
+  
+break;
+case 12:
 this.$ = $$[$0];
 break;
-case 7:
+case 13:
 this.$ = $$[$0-1] + $$[$0];
 break;
 }
 },
-table: [{3:1,4:2,6:3,7:$V0},{1:[3]},{5:[1,5],6:6,7:$V0},o($V1,[2,2]),{8:7,12:$V2},{1:[2,1]},o($V1,[2,3]),{9:[1,9],11:[1,10],12:$V3},o($V4,[2,6]),{10:[1,12]},{8:13,12:$V2},o($V4,[2,7]),o($V1,[2,4]),{9:[1,14],12:$V3},{10:[1,15]},o($V1,[2,5])],
-defaultActions: {5:[2,1]},
+table: [{3:1,4:2,6:3,7:4,8:5,9:6,10:7,11:$V0},{1:[3]},{5:[1,9],6:10,7:4,8:5,9:6,10:7,11:$V0},o($V1,[2,2]),o($V1,[2,4]),o($V1,[2,5]),o($V1,[2,6]),o($V1,[2,7]),{12:11,16:[1,12],17:$V2},{1:[2,1]},o($V1,[2,3]),{13:[1,14],15:[1,15],17:$V3},{12:17,17:$V2},o($V4,[2,12]),{14:[1,18]},{12:19,16:[1,20],17:$V2},o($V4,[2,13]),{15:[1,21],17:$V3},o($V1,[2,8]),{13:[1,22],17:$V3},{12:23,17:$V2},{12:24,17:$V2},{14:[1,25]},{13:[1,26],17:$V3},{13:[1,27],17:$V3},o($V1,[2,9]),{14:[1,28]},{14:[1,29]},o($V1,[2,11]),o($V1,[2,10])],
+defaultActions: {9:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -595,17 +630,17 @@ case 0:/* skip whitespace */
 break;
 case 1:return 'NEWLINE'
 break;
-case 2:return 10
+case 2:return 14
 break;
-case 3:return 7
+case 3:return 11
 break;
-case 4:return 'IMPORTED'
+case 4:return 16
 break;
-case 5:return 9
+case 5:return 13
 break;
-case 6:return 11
+case 6:return 15
 break;
-case 7:return 12
+case 7:return 17
 break;
 case 8:return 5
 break;

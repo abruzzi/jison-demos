@@ -42,11 +42,52 @@ statements:
   }
   ;
 
-statement: COUNT words AT PRICE
-  {$$ = {count: parseInt($1), product: $2, price: parseFloat($4)}}
-  | COUNT words OF words AT PRICE
-  {$$ = {count: parseInt($1), quantity: $2, product: $4, price: parseFloat($6)}}
+statement: simple
+  | with_quantity
+  | with_imported
+  | with_imported2
   ;
+
+simple: COUNT words AT PRICE
+  {
+    $$ = {
+      count: parseInt($1),
+      product: $2,
+      price: parseFloat($4)
+    }
+  };
+
+with_quantity: COUNT words OF words AT PRICE
+  {
+    $$ = {
+      count: parseInt($1),
+      quantity: $2,
+      product: $4,
+      price: parseFloat($6)
+    }
+  };
+
+with_imported: COUNT IMPORTED words OF words AT PRICE
+  {
+    $$ = {
+      count: parseInt($1),
+      type: "imported",
+      quantity: $3,
+      product: $5,
+      price: parseFloat($7)
+    }
+  };
+
+with_imported2: COUNT words OF IMPORTED words AT PRICE
+  {
+    $$ = {
+      count: parseInt($1),
+      type: "imported",
+      quantity: $2,
+      product: $5,
+      price: parseFloat($7)
+    }
+  };
 
 words:
   WORD
