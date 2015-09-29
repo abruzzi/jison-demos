@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o};
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,4],$V1=[5,7],$V2=[9,11];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"simple":4,"EOF":5,"COUNT":6,"WORD":7,"AT":8,"PRICE":9,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",6:"COUNT",7:"WORD",8:"AT",9:"PRICE"},
-productions_: [0,[3,2],[4,4]],
+symbols_: {"error":2,"expressions":3,"statements":4,"EOF":5,"statement":6,"COUNT":7,"words":8,"AT":9,"PRICE":10,"WORD":11,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",7:"COUNT",9:"AT",10:"PRICE",11:"WORD"},
+productions_: [0,[3,2],[4,1],[4,2],[6,4],[8,1],[8,2]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -88,12 +88,35 @@ case 1:
           return $$[$0-1]; 
 break;
 case 2:
-this.$ = {count: $$[$0-3], product: $$[$0-2], price: $$[$0]}
+this.$ = $$[$0]
+break;
+case 3:
+
+
+    if($$[$0-1] instanceof Array) {
+      $$[$0-1].push($$[$0]);
+      this.$ = $$[$0-1];
+    } else {
+      var result = [];
+      result.push($$[$0-1]);
+      result.push($$[$0]);
+      this.$ = result;
+    }
+  
+break;
+case 4:
+this.$ = {count: parseInt($$[$0-3]), product: $$[$0-2], price: parseFloat($$[$0])}
+break;
+case 5:
+this.$ = $$[$0];
+break;
+case 6:
+this.$ = $$[$0-1] + $$[$0];
 break;
 }
 },
-table: [{3:1,4:2,6:[1,3]},{1:[3]},{5:[1,4]},{7:[1,5]},{1:[2,1]},{8:[1,6]},{9:[1,7]},{5:[2,2]}],
-defaultActions: {4:[2,1],7:[2,2]},
+table: [{3:1,4:2,6:3,7:$V0},{1:[3]},{5:[1,5],6:6,7:$V0},o($V1,[2,2]),{8:7,11:[1,8]},{1:[2,1]},o($V1,[2,3]),{9:[1,9],11:[1,10]},o($V2,[2,5]),{10:[1,11]},o($V2,[2,6]),o($V1,[2,4])],
+defaultActions: {5:[2,1]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -568,26 +591,28 @@ var YYSTATE=YY_START;
 switch($avoiding_name_collisions) {
 case 0:/* skip whitespace */
 break;
-case 1:return 9
+case 1:return 'NEWLINE'
 break;
-case 2:return 6
+case 2:return 10
 break;
-case 3:return 'IMPORTED'
+case 3:return 7
 break;
-case 4:return 8
+case 4:return 'IMPORTED'
 break;
-case 5:return 'OF'
+case 5:return 9
 break;
-case 6:return 7
+case 6:return 'OF'
 break;
-case 7:return 5
+case 7:return 11
 break;
-case 8:return 'INVALID'
+case 8:return 5
+break;
+case 9:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:[0-9]+(\.[0-9]+)+)/,/^(?:[0-9]+)/,/^(?:imported\b)/,/^(?:at\b)/,/^(?:of\b)/,/^(?:[a-zA-Z]+)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:\n)/,/^(?:[0-9]+(\.[0-9]+)+)/,/^(?:[0-9]+)/,/^(?:imported\b)/,/^(?:at\b)/,/^(?:of\b)/,/^(?:[a-zA-Z]+)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9],"inclusive":true}}
 });
 return lexer;
 })();
