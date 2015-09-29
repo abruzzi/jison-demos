@@ -9,6 +9,7 @@
 "imported"            return 'IMPORTED'
 "at"                  return 'AT'
 "of"                  return 'OF'
+'"'("\\"["]|[^"])*'"'	return 'STRING'
 [a-zA-Z]+             return 'WORD'
 <<EOF>>               return 'EOF'
 .                     return 'INVALID'
@@ -90,8 +91,8 @@ with_imported2: COUNT words OF IMPORTED words AT PRICE
   };
 
 words:
-  WORD
+  STRING
+  {$$ = $1.substring(1, $1.length - 1);}
+  | WORD
   {$$ = $1;}
-  | words WORD
-  {$$ = $1 + $2;}
   ;
