@@ -1,10 +1,12 @@
 /* lexical grammar */
+
 %lex
 %%
 
 \s+                     /* skip whitespace */
 \n|\r\n                 /* skip whitespace */
 "NAME"                  return "NAME"
+"DATA"                  return "DATA"
 "LAYER"                 return "LAYER"
 "END"                   return "END"
 '"'("\\"["]|[^"])*'"'	  return 'STRING'
@@ -14,6 +16,21 @@
 .                       return 'INVALID'
 
 /lex
+
+%{
+  function merge(o1, o2) {
+    var obj = {};
+
+    for(var k in o1) {
+      obj[k] = o1[k];
+    }
+    for(var v in o2) {
+      obj[v] = o2[v];
+    }
+
+    return obj;
+  }
+%}
 
 %start expressions
 
@@ -28,10 +45,20 @@ expressions
     ;
 
 decls:
-  LAYER decl END
+  LAYER pairs END
   {$$ = {layer: $2}}
   ;
 
-decl:
+pairs:
+  pair
+  {$$ = $1}
+  |
+  pairs pair
+  {$$ = merge($1, $2)}
+  ;
+
+pair:
   NAME STRING
-  {$$ = $2.substring(1, $2.length - 1)};
+  {$$ = {name: $2.substring(1, $2.length - 1)}}
+  | DATA STRING
+  {$$ = {data: $2.substring(1, $2.length - 1)}};

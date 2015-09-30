@@ -1,3 +1,4 @@
 LAYER
   NAME         "counties"
+  DATA         "counties-in-shaanxi-3857"
 END
