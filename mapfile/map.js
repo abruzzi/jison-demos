@@ -75,9 +75,9 @@ var parser = (function(){
 var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o};
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"decls":4,"EOF":5,"LAYER":6,"END":7,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",6:"LAYER",7:"END"},
-productions_: [0,[3,2],[4,2]],
+symbols_: {"error":2,"expressions":3,"decls":4,"EOF":5,"LAYER":6,"decl":7,"END":8,"NAME":9,"STRING":10,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",6:"LAYER",8:"END",9:"NAME",10:"STRING"},
+productions_: [0,[3,2],[4,3],[7,2]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -90,12 +90,15 @@ case 1:
         
 break;
 case 2:
-this.$ = {layer: null}
+this.$ = {layer: $$[$0-1]}
+break;
+case 3:
+this.$ = $$[$0].substring(1, $$[$0].length - 1)
 break;
 }
 },
-table: [{3:1,4:2,6:[1,3]},{1:[3]},{5:[1,4]},{7:[1,5]},{1:[2,1]},{5:[2,2]}],
-defaultActions: {4:[2,1],5:[2,2]},
+table: [{3:1,4:2,6:[1,3]},{1:[3]},{5:[1,4]},{7:5,9:[1,6]},{1:[2,1]},{8:[1,7]},{10:[1,8]},{5:[2,2]},{8:[2,3]}],
+defaultActions: {4:[2,1],7:[2,2],8:[2,3]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -572,30 +575,26 @@ case 0:/* skip whitespace */
 break;
 case 1:/* skip whitespace */
 break;
-case 2:return "MAP"
+case 2:return "NAME"
 break;
 case 3:return "LAYER"
 break;
 case 4:return "END"
 break;
-case 5:return "MULTIPLE"
+case 5:return 10
 break;
-case 6:return "DIVIDE"
+case 6:return 'WORD'
 break;
-case 7:return "LP"
+case 7:return 'NUMBER'
 break;
-case 8:return "RP"
+case 8:return 5
 break;
-case 9:return 'NUMBER'
-break;
-case 10:return 5
-break;
-case 11:return 'INVALID'
+case 9:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:\n|\r\n)/,/^(?:MAP\b)/,/^(?:LAYER\b)/,/^(?:END\b)/,/^(?:\*)/,/^(?:\/)/,/^(?:\()/,/^(?:\))/,/^(?:[0-9]+(\.[0-9]+)?)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:\n|\r\n)/,/^(?:NAME\b)/,/^(?:LAYER\b)/,/^(?:END\b)/,/^(?:"(\\["]|[^"])*")/,/^(?:[a-zA-Z]+)/,/^(?:[0-9]+(\.[0-9]+)?)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9],"inclusive":true}}
 });
 return lexer;
 })();

@@ -2,18 +2,16 @@
 %lex
 %%
 
-\s+                    /* skip whitespace */
+\s+                     /* skip whitespace */
 \n|\r\n                 /* skip whitespace */
-"MAP"                   return "MAP"
+"NAME"                  return "NAME"
 "LAYER"                 return "LAYER"
 "END"                   return "END"
-"*"                   return "MULTIPLE"
-"/"                   return "DIVIDE"
-"("                   return "LP"
-")"                   return "RP"
-[0-9]+("."[0-9]+)?    return 'NUMBER'
-<<EOF>>               return 'EOF'
-.                     return 'INVALID'
+'"'("\\"["]|[^"])*'"'	  return 'STRING'
+[a-zA-Z]+               return 'WORD'
+[0-9]+("."[0-9]+)?      return 'NUMBER'
+<<EOF>>                 return 'EOF'
+.                       return 'INVALID'
 
 /lex
 
@@ -30,6 +28,10 @@ expressions
     ;
 
 decls:
-  LAYER END
-  {$$ = {layer: null}}
+  LAYER decl END
+  {$$ = {layer: $2}}
   ;
+
+decl:
+  NAME STRING
+  {$$ = $2.substring(1, $2.length - 1)};
