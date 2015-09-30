@@ -1,4 +1,15 @@
 LAYER
   NAME         "counties"
   DATA         "counties-in-shaanxi-3857"
+  STATUS       "default"
+  TYPE         "POLYGON"
+  TRANSPARENCY 70
+
+  CLASS
+    NAME       "polygon"
+    STYLE
+      COLOR     255 255 255
+      OUTLINECOLOR 40 44 52
+    END
+  END
 END

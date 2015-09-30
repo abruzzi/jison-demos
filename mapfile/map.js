@@ -72,12 +72,12 @@
   }
 */
 var parser = (function(){
-var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,7],$V1=[1,8],$V2=[8,10,12];
+var o=function(k,v,o,l){for(o=o||{},l=k.length;l--;o[k[l]]=v);return o},$V0=[1,7],$V1=[1,8],$V2=[1,9],$V3=[1,10],$V4=[1,11],$V5=[1,12],$V6=[1,13],$V7=[1,16],$V8=[1,17],$V9=[8,10,12,13,14,15,17,18,21,22];
 var parser = {trace: function trace() { },
 yy: {},
-symbols_: {"error":2,"expressions":3,"decls":4,"EOF":5,"LAYER":6,"pairs":7,"END":8,"pair":9,"NAME":10,"STRING":11,"DATA":12,"$accept":0,"$end":1},
-terminals_: {2:"error",5:"EOF",6:"LAYER",8:"END",10:"NAME",11:"STRING",12:"DATA"},
-productions_: [0,[3,2],[4,3],[7,1],[7,2],[9,2],[9,2]],
+symbols_: {"error":2,"expressions":3,"decls":4,"EOF":5,"LAYER":6,"pairs":7,"END":8,"pair":9,"NAME":10,"STRING":11,"DATA":12,"STATUS":13,"TYPE":14,"COLOR":15,"NUMBER":16,"OUTLINECOLOR":17,"TRANSPARENCY":18,"styles":19,"classes":20,"STYLE":21,"CLASS":22,"$accept":0,"$end":1},
+terminals_: {2:"error",5:"EOF",6:"LAYER",8:"END",10:"NAME",11:"STRING",12:"DATA",13:"STATUS",14:"TYPE",15:"COLOR",16:"NUMBER",17:"OUTLINECOLOR",18:"TRANSPARENCY",21:"STYLE",22:"CLASS"},
+productions_: [0,[3,2],[4,3],[7,1],[7,2],[9,2],[9,2],[9,2],[9,2],[9,4],[9,4],[9,2],[9,1],[9,1],[19,3],[20,3]],
 performAction: function anonymous(yytext, yyleng, yylineno, yy, yystate /* action[1] */, $$ /* vstack */, _$ /* lstack */) {
 /* this == yyval */
 
@@ -85,14 +85,14 @@ var $0 = $$.length - 1;
 switch (yystate) {
 case 1:
 
-        typeof console !== 'undefined' ? console.log($$[$0-1]) : print($$[$0-1]);
+        console.log($$[$0-1]);
         return $$[$0-1];
         
 break;
 case 2:
 this.$ = {layer: $$[$0-1]}
 break;
-case 3:
+case 3: case 12: case 13:
 this.$ = $$[$0]
 break;
 case 4:
@@ -104,10 +104,31 @@ break;
 case 6:
 this.$ = {data: $$[$0].substring(1, $$[$0].length - 1)}
 break;
+case 7:
+this.$ = {status: $$[$0].substring(1, $$[$0].length - 1)}
+break;
+case 8:
+this.$ = {type: $$[$0].substring(1, $$[$0].length - 1)}
+break;
+case 9:
+this.$ = {color: colorString($$[$0-2], $$[$0-1], $$[$0])}
+break;
+case 10:
+this.$ = {outlineColor: colorString($$[$0-2], $$[$0-1], $$[$0])}
+break;
+case 11:
+this.$ = {type: parseInt($$[$0])}
+break;
+case 14:
+this.$ = {style: $$[$0-1]}
+break;
+case 15:
+this.$ = {class: $$[$0-1]}
+break;
 }
 },
-table: [{3:1,4:2,6:[1,3]},{1:[3]},{5:[1,4]},{7:5,9:6,10:$V0,12:$V1},{1:[2,1]},{8:[1,9],9:10,10:$V0,12:$V1},o($V2,[2,3]),{11:[1,11]},{11:[1,12]},{5:[2,2]},o($V2,[2,4]),o($V2,[2,5]),o($V2,[2,6])],
-defaultActions: {4:[2,1],9:[2,2]},
+table: [{3:1,4:2,6:[1,3]},{1:[3]},{5:[1,4]},{7:5,9:6,10:$V0,12:$V1,13:$V2,14:$V3,15:$V4,17:$V5,18:$V6,19:14,20:15,21:$V7,22:$V8},{1:[2,1]},{8:[1,18],9:19,10:$V0,12:$V1,13:$V2,14:$V3,15:$V4,17:$V5,18:$V6,19:14,20:15,21:$V7,22:$V8},o($V9,[2,3]),{11:[1,20]},{11:[1,21]},{11:[1,22]},{11:[1,23]},{16:[1,24]},{16:[1,25]},{16:[1,26]},o($V9,[2,12]),o($V9,[2,13]),{7:27,9:6,10:$V0,12:$V1,13:$V2,14:$V3,15:$V4,17:$V5,18:$V6,19:14,20:15,21:$V7,22:$V8},{7:28,9:6,10:$V0,12:$V1,13:$V2,14:$V3,15:$V4,17:$V5,18:$V6,19:14,20:15,21:$V7,22:$V8},{5:[2,2]},o($V9,[2,4]),o($V9,[2,5]),o($V9,[2,6]),o($V9,[2,7]),o($V9,[2,8]),{16:[1,29]},{16:[1,30]},o($V9,[2,11]),{8:[1,31],9:19,10:$V0,12:$V1,13:$V2,14:$V3,15:$V4,17:$V5,18:$V6,19:14,20:15,21:$V7,22:$V8},{8:[1,32],9:19,10:$V0,12:$V1,13:$V2,14:$V3,15:$V4,17:$V5,18:$V6,19:14,20:15,21:$V7,22:$V8},{16:[1,33]},{16:[1,34]},o($V9,[2,14]),o($V9,[2,15]),o($V9,[2,9]),o($V9,[2,10])],
+defaultActions: {4:[2,1],18:[2,2]},
 parseError: function parseError(str, hash) {
     if (hash.recoverable) {
         this.trace(str);
@@ -252,6 +273,10 @@ parse: function parse(input) {
     }
     return true;
 }};
+
+  function colorString(r, g, b) {
+      return "rgb(" +r+ "," +g+ "," +b+ ")";
+  }
 
   function merge(o1, o2) {
     var obj = {};
@@ -601,24 +626,38 @@ case 2:return "NAME"
 break;
 case 3:return "DATA"
 break;
-case 4:return "LAYER"
+case 4:return "STATUS"
 break;
-case 5:return "END"
+case 5:return "TYPE"
 break;
-case 6:return 11
+case 6:return "TRANSPARENCY"
 break;
-case 7:return 'WORD'
+case 7:return "CLASS"
 break;
-case 8:return 'NUMBER'
+case 8:return "STYLE"
 break;
-case 9:return 5
+case 9:return "COLOR"
 break;
-case 10:return 'INVALID'
+case 10:return "OUTLINECOLOR"
+break;
+case 11:return "LAYER"
+break;
+case 12:return "END"
+break;
+case 13:return 11
+break;
+case 14:return 'WORD'
+break;
+case 15:return 16
+break;
+case 16:return 5
+break;
+case 17:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:\n|\r\n)/,/^(?:NAME\b)/,/^(?:DATA\b)/,/^(?:LAYER\b)/,/^(?:END\b)/,/^(?:"(\\["]|[^"])*")/,/^(?:[a-zA-Z]+)/,/^(?:[0-9]+(\.[0-9]+)?)/,/^(?:$)/,/^(?:.)/],
-conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10],"inclusive":true}}
+rules: [/^(?:\s+)/,/^(?:\n|\r\n)/,/^(?:NAME\b)/,/^(?:DATA\b)/,/^(?:STATUS\b)/,/^(?:TYPE\b)/,/^(?:TRANSPARENCY\b)/,/^(?:CLASS\b)/,/^(?:STYLE\b)/,/^(?:COLOR\b)/,/^(?:OUTLINECOLOR\b)/,/^(?:LAYER\b)/,/^(?:END\b)/,/^(?:"(\\["]|[^"])*")/,/^(?:[a-zA-Z]+)/,/^(?:[0-9]+(\.[0-9]+)?)/,/^(?:$)/,/^(?:.)/],
+conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],"inclusive":true}}
 });
 return lexer;
 })();
