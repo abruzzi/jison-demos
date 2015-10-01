@@ -22,7 +22,7 @@
 expressions
     : statement EOF
         {
-        typeof console !== 'undefined' ? console.log($1) : print($1);
+        console.log($1);
         return $1;
         }
     ;
@@ -44,7 +44,7 @@ term:
   ;
 
 factor:
-  NUMBER {$$ = parseFloat(yytext)}
+  NUMBER {$$ = parseFloat($1)}
   |
   LP statement RP {$$ = $2}
   ;

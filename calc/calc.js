@@ -105,7 +105,7 @@ case 6:
 this.$ = $$[$0-2] / $$[$0]
 break;
 case 8:
-this.$ = parseFloat(yytext)
+this.$ = parseFloat($$[$0])
 break;
 case 9:
 this.$ = $$[$0-1]
